@@ -14,7 +14,7 @@ public class ProgramTests
         //Arrange
         Program program = new Program();
 
-        program.Items = new List<Item>{ new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 }};
+        program.Items = new List<Item>{ new Brie { Name = "Aged Brie", SellIn = 2, Quality = 0 }};
         //Act
         program.UpdateQuality();
         //Assert
@@ -28,7 +28,7 @@ public class ProgramTests
         //Arrange
         Program program = new Program();
 
-        program.Items = new List<Item>{ new Item { Name = "Aged Brie", SellIn = 2, Quality = 0 }};
+        program.Items = new List<Item>{ new Brie { Name = "Aged Brie", SellIn = 2, Quality = 0 }};
         //Act
         program.UpdateQuality();
         program.UpdateQuality();
@@ -44,7 +44,7 @@ public class ProgramTests
         //Arrange
         Program program = new Program();
 
-        program.Items = new List<Item>{ new Item { Name = "Aged Brie", SellIn = 2, Quality = 49 }};
+        program.Items = new List<Item>{ new Brie { Name = "Aged Brie", SellIn = 2, Quality = 49 }};
         //Act
         program.UpdateQuality();
         program.UpdateQuality();
@@ -92,7 +92,7 @@ public class ProgramTests
     {
         //arrange
         Program program = new Program();
-        program.Items = new List<Item>{ new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 2, Quality = 0 }};
+        program.Items = new List<Item>{ new BackstagePass { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 2, Quality = 0 }};
 
         //act
         program.UpdateQuality();
@@ -106,7 +106,7 @@ public class ProgramTests
     {
         //arrange
         Program program = new Program();
-        program.Items = new List<Item>{ new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 6, Quality = 0 }};
+        program.Items = new List<Item>{ new BackstagePass{ Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 6, Quality = 0 }};
 
         //act
         program.UpdateQuality();
@@ -120,7 +120,7 @@ public class ProgramTests
     {
         //arrange
         Program program = new Program();
-        program.Items = new List<Item>{ new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 0 }};
+        program.Items = new List<Item>{ new BackstagePass { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 0 }};
 
         //act
         program.UpdateQuality();
@@ -133,7 +133,7 @@ public class ProgramTests
     public void Update_backstage_pass_should_have_maximum_quality_50()
     {
         Program program = new Program();
-        program.Items = new List<Item>{ new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 1, Quality = 50 }};
+        program.Items = new List<Item>{ new BackstagePass { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 1, Quality = 50 }};
 
         //act
         program.UpdateQuality();
@@ -147,7 +147,7 @@ public class ProgramTests
         //Arrange
         Program program = new Program();
 
-        program.Items = new List<Item>{ new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 }};
+        program.Items = new List<Item>{ new Legendary { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 }};
         //Act
         program.UpdateQuality();
         //Assert
@@ -160,12 +160,38 @@ public class ProgramTests
         //Arrange
         Program program = new Program();
 
-        program.Items = new List<Item>{ new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 }};
+        program.Items = new List<Item>{ new Legendary { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 }};
         //Act
         for (int i = 0; i <= 12; i++) program.UpdateQuality();
         //Assert
         program.Items[0].SellIn.Should().Be(0);
         program.Items[0].Quality.Should().Be(80);
+    }
+
+    [Fact]
+    public void Conjured_Degrades_Twice_As_Fast(){
+        //Arrange
+        Program program = new Program();
+
+        program.Items = new List<Item>{ new Conjured { Name = "Conjured Mana Cake", SellIn = 3, Quality = 6  }};
+        //Act
+        for (int i = 0; i < 2; i++) program.UpdateQuality();
+        //Assert
+        program.Items[0].SellIn.Should().Be(1);
+        program.Items[0].Quality.Should().Be(2);
+    }
+
+     [Fact]
+    public void Conjured_Degrades_4times_As_Fast_after_Sellin(){
+        //Arrange
+        Program program = new Program();
+
+        program.Items = new List<Item>{ new Conjured { Name = "Conjured Mana Cake", SellIn = 3, Quality = 30  }};
+        //Act
+        for (int i = 0; i < 5; i++) program.UpdateQuality();
+        //Assert
+        program.Items[0].SellIn.Should().Be(-2);
+        program.Items[0].Quality.Should().Be(16);
     }
 
    
