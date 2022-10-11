@@ -62,7 +62,21 @@ namespace GildedRose
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                Items[i].UpdateItem();
+                if (Items[i] is IUpdateable){
+                IUpdateable item = Items[i] as IUpdateable;    
+                item.UpdateItem();
+                Items[i] = item as Item;
+                }
+                else {
+                    if (Items[i].SellIn > 0){
+                        Items[i].SellIn--;
+                        Items[i].Quality--;
+                    }       
+                    else {
+                        Items[i].SellIn--;
+                        Items[i].Quality = Items[i].Quality-2;
+                    }
+                }
             }
         }
 

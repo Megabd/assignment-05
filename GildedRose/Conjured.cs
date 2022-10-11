@@ -1,8 +1,8 @@
 namespace GildedRose;
-public class Conjured : Item 
+public class Conjured : Item, IUpdateable
 {
 
-    public override void UpdateItem()
+    public void UpdateItem()
     {
         if (SellIn > 0) 
         {

@@ -1,5 +1,5 @@
 namespace GildedRose;
-public class BackstagePass : Item{
+public class BackstagePass : Item, IUpdateable{
 
     public override void UpdateItem(){
         //My suggestion for avoiding a double-nested condition statement
@@ -32,7 +32,7 @@ public class BackstagePass : Item{
                     } else {
                         Quality = Quality+2;
                     }
-                } else {
+                } else {
                     Quality = 0;
                 }
             }
