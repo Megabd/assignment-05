@@ -1,5 +1,5 @@
 namespace GildedRose;
-public class Item : IUpdateable
+public class Item
     {
         public string Name { get; set; }
 
@@ -7,14 +7,4 @@ public class Item : IUpdateable
 
         public int Quality { get; set; }
 
-        public virtual void UpdateItem(){
-            if (SellIn > 0){
-            SellIn--;
-            Quality--;
-            }
-            else {
-                SellIn--;
-                Quality = Quality-2;
-            }
-        }
     }

@@ -1,7 +1,7 @@
 namespace GildedRose;
-public class BackstagePass : Item{
+public class BackstagePass : Item, IUpdateable{
 
-    public override void UpdateItem(){
+    public void UpdateItem(){
         if(Quality<50){
             if(SellIn > 10){
                 Quality++;

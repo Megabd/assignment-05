@@ -1,8 +1,8 @@
 namespace GildedRose;
-public class Brie : Item
+public class Brie : Item, IUpdateable
 {
 
-    public override void UpdateItem(){
+    public void UpdateItem(){
             if (SellIn > 0){
                 Quality++;
             }

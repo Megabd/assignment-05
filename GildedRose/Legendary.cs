@@ -1,8 +1,8 @@
 namespace GildedRose;
-public class Legendary : Item
+public class Legendary : Item, IUpdateable
 {
 
-    public override void UpdateItem() 
+    public void UpdateItem() 
     {
         SellIn = SellIn;
         Quality = Quality;
