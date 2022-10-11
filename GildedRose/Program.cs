@@ -63,8 +63,8 @@ namespace GildedRose
             for (var i = 0; i < Items.Count; i++)
             {
                 if (Items[i] is IUpdateable){
-                IUpdateable item = Items[i] as IUpdateable;    
-                item.UpdateItem();
+                IUpdateable? item = Items[i] as IUpdateable;    
+                item!.UpdateItem();
                 Items[i] = item as Item;
                 }
                 else {
